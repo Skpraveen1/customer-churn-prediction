@@ -177,10 +177,70 @@ elif page == "⚙️ Model Settings":
 
     st.divider()
     st.markdown("**Retrain Model**")
-    st.markdown("Upload a new dataset to retrain the XGBoost model.")
+    st.markdown("Upload a new churn dataset (must have a `Churn` column) to retrain the XGBoost model.")
+
     uploaded = st.file_uploader("Upload CSV", type=["csv"])
     if uploaded:
-        st.info("Retraining pipeline not yet wired — drop your `model.py` logic here.")
+        df_new = pd.read_csv(uploaded)
+        st.markdown(f"**Preview** — {len(df_new)} rows, {len(df_new.columns)} columns")
+        st.dataframe(df_new.head(), use_container_width=True)
+
+        # Validate the target column exists
+        if "Churn" not in df_new.columns:
+            st.error("❌ CSV must have a 'Churn' column as the target variable.")
+        else:
+            if st.button("🚀 Retrain Model", type="primary"):
+                with st.spinner("Retraining model — please wait..."):
+                    try:
+                        from sklearn.preprocessing import LabelEncoder
+                        from sklearn.model_selection import train_test_split
+                        from sklearn.metrics import roc_auc_score
+                        from xgboost import XGBClassifier
+
+                        # Drop irrelevant ID columns if present
+                        drop_cols = [c for c in ["customerID", "CustomerID"] if c in df_new.columns]
+                        df_new = df_new.drop(columns=drop_cols)
+
+                        # Encode target
+                        if df_new["Churn"].dtype == object:
+                            df_new["Churn"] = df_new["Churn"].map({"Yes": 1, "No": 0, "True": 1, "False": 0}).fillna(df_new["Churn"])
+
+                        df_new = df_new.dropna()
+
+                        # Encode categoricals
+                        le = LabelEncoder()
+                        for col in df_new.select_dtypes(include="object").columns:
+                            df_new[col] = le.fit_transform(df_new[col])
+
+                        # Split
+                        X = df_new.drop("Churn", axis=1)
+                        y = df_new["Churn"]
+                        X_train, X_test, y_train, y_test = train_test_split(
+                            X, y, test_size=0.2, random_state=42
+                        )
+
+                        # Train
+                        new_model = XGBClassifier(n_estimators=100, random_state=42, eval_metric="logloss")
+                        new_model.fit(X_train, y_train)
+
+                        # Evaluate
+                        auc = roc_auc_score(y_test, new_model.predict_proba(X_test)[:, 1])
+
+                        # Save
+                        new_features = list(X.columns)
+                        with open("model.pkl", "wb") as f:
+                            pickle.dump(new_model, f)
+                        with open("features.pkl", "wb") as f:
+                            pickle.dump(new_features, f)
+
+                        # Clear cached model so it reloads
+                        st.cache_resource.clear()
+
+                        st.success(f"✅ Model retrained successfully! New AUC Score: **{auc:.4f}**")
+                        st.info("The app will now use the new model for predictions.")
+
+                    except Exception as e:
+                        st.error(f"❌ Retraining failed: {e}")
 
 # ═════════════════════════════════════════════════════════════════════════════
 # PAGE: Manage Users (manager only)
