@@ -1,0 +1,86 @@
+[
+  {
+    "timestamp": "2026-05-05 07:38:24",
+    "date": "2026-05-05",
+    "time": "07:38",
+    "user_id": "MGR-2001",
+    "user_name": "Anita Rao",
+    "churn_prob": 42.9,
+    "is_high_risk": false,
+    "inputs": {
+      "tenure": 12,
+      "MonthlyCharges": 65,
+      "TotalCharges": 780,
+      "Contract": "Month-to-Month",
+      "InternetService": "DSL",
+      "PaymentMethod": "Bank Transfer",
+      "SeniorCitizen": 0,
+      "TechSupport": "No",
+      "PhoneService": "Yes",
+      "PaperlessBilling": "Yes"
+    }
+  },
+  {
+    "timestamp": "2026-05-05 07:39:50",
+    "date": "2026-05-05",
+    "time": "07:39",
+    "user_id": "MGR-2001",
+    "user_name": "Anita Rao",
+    "churn_prob": 22.8,
+    "is_high_risk": false,
+    "inputs": {
+      "tenure": 40,
+      "MonthlyCharges": 83,
+      "TotalCharges": 3320,
+      "Contract": "Two Year",
+      "InternetService": "DSL",
+      "PaymentMethod": "Bank Transfer",
+      "SeniorCitizen": 0,
+      "TechSupport": "No",
+      "PhoneService": "Yes",
+      "PaperlessBilling": "Yes"
+    }
+  },
+  {
+    "timestamp": "2026-05-05 08:07:05",
+    "date": "2026-05-05",
+    "time": "08:07",
+    "user_id": "MGR-2004",
+    "user_name": "Praveen Kattimani",
+    "churn_prob": 91.4,
+    "is_high_risk": true,
+    "inputs": {
+      "tenure": 12,
+      "MonthlyCharges": 102,
+      "TotalCharges": 1224,
+      "Contract": "Month-to-Month",
+      "InternetService": "DSL",
+      "PaymentMethod": "Bank Transfer",
+      "SeniorCitizen": 0,
+      "TechSupport": "No",
+      "PhoneService": "Yes",
+      "PaperlessBilling": "Yes"
+    }
+  },
+  {
+    "timestamp": "2026-05-05 08:16:30",
+    "date": "2026-05-05",
+    "time": "08:16",
+    "user_id": "EMP-1001",
+    "user_name": "Priya Sharma",
+    "churn_prob": 57.8,
+    "is_high_risk": true,
+    "inputs": {
+      "tenure": 72,
+      "MonthlyCharges": 36,
+      "TotalCharges": 2592,
+      "Contract": "Two Year",
+      "InternetService": "DSL",
+      "PaymentMethod": "Bank Transfer",
+      "SeniorCitizen": 0,
+      "TechSupport": "No",
+      "PhoneService": "Yes",
+      "PaperlessBilling": "Yes"
+    }
+  }
+]

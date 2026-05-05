@@ -1,0 +1,27 @@
+{
+  "EMP-1001": {
+    "password_hash": "595b36460c51486014024d62eff1045eceb3c780676f8a614173226f7a561e10",
+    "role": "employee",
+    "name": "Priya Sharma"
+  },
+  "EMP-1002": {
+    "password_hash": "cc0cd7c5e4be4f45f6523663c28d75aed9019722aae2c92aa684d0143a172813",
+    "role": "employee",
+    "name": "Rahul Mehta"
+  },
+  "MGR-2001": {
+    "password_hash": "aaa507108bbf78d3b5708ed609e6b6eca0b124ee0a2b07c368fe1e7a411e50e4",
+    "role": "manager",
+    "name": "Anita Rao"
+  },
+  "MGR-2002": {
+    "password_hash": "87c43d04c5970a82a05e48a3c17d94da3ea945f4a391c2f678e31148a75eacbf",
+    "role": "manager",
+    "name": "Vikram Singh"
+  },
+  "MGR-2004": {
+    "password_hash": "fd8d34859bbe48616fec6269cb65603df422e320c6672fcd05437d5c350eac80",
+    "role": "manager",
+    "name": "Praveen Kattimani"
+  }
+}
